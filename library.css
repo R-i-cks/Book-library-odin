@@ -3,7 +3,10 @@
     padding: 0;
 }
 
-
+@font-face {
+    font-family: 'GV';
+    src: url('./GreatVibes-Regular.ttf');
+}
 
 .page{
     display: flex;
@@ -18,6 +21,7 @@
     text-align: center;
     padding: 10px;
     background-color: #A28B55;
+
 }
 
 .page-content{
@@ -71,6 +75,8 @@ img{
 .greeting{
     text-align: center;
     padding: 5%;
+    font-family: GV ;
+    font-size: 1.5rem;
     
 }
 .book{
@@ -92,7 +98,7 @@ img{
     border-top-right-radius: 20px;
 }
 
-.book button{
+.book button.remove-button{
     display: flex;
     width: 10%;
     height: 20px;
@@ -103,6 +109,30 @@ img{
     background-color: crimson;
     color: #E7FBE6;
 }
+
+
+.book button.remove-button:hover{
+    background-color: #E7FBE6;
+    color: crimson;
+}
+
+
+.read-status button{
+    display: flex;
+    width: 40%;
+    height: 20px;
+    margin-right: 5%;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.read-status button:hover{
+    opacity: 0.6;
+    font-weight: bolder;
+    ;
+}
+
 
 .book-and-icon{
 
@@ -165,12 +195,17 @@ input[type="number"] {
     justify-content:space-around;
  }
 
-button{
+button {
     width: 90%;
     margin: 2%;
     border-radius: 5px;
     padding: 3%;
     border: none;
     box-shadow: rgba(223, 217, 217, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;    
+}
+
+button:hover{
+    background-color: #A28B55;
+    color: #E7FBE6;
 }
 

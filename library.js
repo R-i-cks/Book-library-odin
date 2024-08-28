@@ -10,7 +10,19 @@ function Book(title, author, pages, read, image="https://via.placeholder.com/150
     this.image = image;
     this.info = function (){
     return `${this.title}, ${this.author}, ${this.pages} pages, ${this.read}`;    }
+
+
+    this.toggleRead = function(){
+        if (this.read === 'read'){
+            this.read = 'not read yet';
+        }else{
+            this.read = 'read';
+        }
+        return this.read;
+    }
 }   
+
+
 
 const got = new Book("Game of Thrones", "George R. R. Martin", 694, 'not read yet', "https://images-na.ssl-images-amazon.com/images/I/91dSMhdIzTL.jpg");
 const hp = new Book("Harry Potter", "J.K. Rowling", 500, 'read', "https://images-na.ssl-images-amazon.com/images/I/81YOuOGFCJL.jpg");
@@ -37,7 +49,22 @@ addBookToLibrary(mobyDick);
 addBookToLibrary(warPeace);
 addBookToLibrary(annaKarenina);
 
+function adaptColors(){
 
+    const readStatusButtons = document.querySelectorAll('.read-status button');
+
+    readStatusButtons.forEach(button => {
+        if (button.textContent === 'read') {
+            // Define a cor para livros lidos
+            button.style.backgroundColor = '#379777'; // Verde
+            button.style.color = '#E7FBE6'; // Branco
+        } else  {
+            // Define a cor para livros não lidos
+            button.style.backgroundColor = '#B22222'; // Vermelho
+            button.style.color = '#E7FBE6'; // Branco
+        }
+    });
+}
 
 function displayBooks(library){
     const bookContainer = document.querySelector('.books');
@@ -48,6 +75,7 @@ function displayBooks(library){
         book.setAttribute('id', library[i].title);
         const cover = document.createElement('img');
         const removeButton = document.createElement('button');
+        removeButton.classList.add('remove-button');
         removeButton.setAttribute('id', library[i].title);
         removeButton.textContent = "X";
         removeButton.addEventListener('click', function(e){
@@ -73,15 +101,25 @@ function displayBooks(library){
         const pages = document.createElement('p');
         pages.textContent = "Pages: " + library[i].pages;
         book.appendChild(pages);
-        const read = document.createElement('p');
-        read.textContent = "Read: " + library[i].read;
+        const read = document.createElement('div');
+        read.classList.add('read-status');
+
+        read.textContent = "Read: ";
+        const toggleReadButton = document.createElement('button');
+        toggleReadButton.textContent = library[i].read;
+        toggleReadButton.addEventListener('click', function(){
+            library[i].toggleRead();
+            toggleReadButton.textContent = library[i].read;
+            adaptColors();
+        })
+        read.appendChild(toggleReadButton);
         book.appendChild(read);
         bookContainer.appendChild(book);
     }
 }
 
 displayBooks(myLibrary)
-
+adaptColors();
 
 let newBookForm = document.getElementById('newBookForm')
 
